@@ -8,7 +8,6 @@ class LoginScreen extends StatelessWidget {
   Widget build(context) {
     final bloc = Provider.of(context);
 
-    // FIXTHIS - SafeArea
     return Container(
         margin: EdgeInsets.all(28.0),
         child: Column(children: [
@@ -38,7 +37,7 @@ class LoginScreen extends StatelessWidget {
             onChanged: bloc.changeEmail,
             keyboardType: TextInputType.emailAddress,
             decoration: InputDecoration(
-                hintText: 'you@example.com', // FIXTHIS - final
+                hintText: 'you@example.com',
                 labelText: 'Email Address',
                 errorText: snapshot.error),
           );
@@ -52,10 +51,10 @@ class LoginScreen extends StatelessWidget {
         builder: (context, snapshot) {
           return TextField(
             onChanged: bloc.changePassword,
-            obscureText: false, // FIXTHIS - boolean value
+            obscureText: false,
             decoration: InputDecoration(
                 hintText: 'Password',
-                labelText: 'Password', // FIXTHIS - final
+                labelText: 'Password',
                 errorText: snapshot.error),
           );
         });
@@ -69,7 +68,6 @@ class LoginScreen extends StatelessWidget {
           return ButtonTheme(
             minWidth: double.infinity,
             child: RaisedButton(
-              // FIXTHIS - RaisedButton
               child: Text('Log In'),
               color: Colors.blue,
               textColor: Colors.white,

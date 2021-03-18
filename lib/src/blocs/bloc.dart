@@ -4,7 +4,7 @@ import 'package:rxdart/rxdart.dart';
 
 class Bloc extends Object with Validators {
   final _emailController = BehaviorSubject<String>();
-  final passwordController = BehaviorSubject<String>(); // FIXTHIS - private
+  final passwordController = BehaviorSubject<String>();
 
   // Add data to the stream
   Stream<String> get email => _emailController.stream.transform(validateEmail);
