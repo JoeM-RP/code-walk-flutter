@@ -22,7 +22,8 @@ class Bloc extends Object with Validators {
     final validPass = passwordController.value;
 
     // Pretend this info goes somewhere meaningful at this point
-    print('Auth success, probably');
+    print('Email is $validEmail');
+    print('Password is $validPass');
     // end Pretend
   }
 
