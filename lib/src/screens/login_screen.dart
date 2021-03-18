@@ -1,14 +1,24 @@
-import 'package:demo/src/app.dart';
 import 'package:flutter/material.dart';
 import '../blocs/bloc.dart';
 import '../blocs/provider.dart';
 
 class LoginScreen extends StatelessWidget {
+  // Constants
+  final title = 'Hello, Code Walk!';
+
+  final passwordFieldLabel = 'Password';
+  final passwordFieldHint = 'Password';
+
+  final emailFieldLabel = 'Email Address';
+  final emailFieldHint = 'you@example.com';
+
+  final submitButtonText = 'Log In';
+
   // Main Widget
   Widget build(context) {
     final bloc = Provider.of(context);
-
-    return Container(
+    return SafeArea(
+      child: Container(
         margin: EdgeInsets.all(28.0),
         child: Column(children: [
           titleField(),
@@ -16,13 +26,15 @@ class LoginScreen extends StatelessWidget {
           passwordField(bloc),
           Container(margin: EdgeInsets.only(top: 28.0)),
           submitButton(bloc),
-        ]));
+        ]),
+      ),
+    );
   }
 
   // Title Field
   Widget titleField() {
     return Text(
-      'Hello, Code Walk!',
+      title,
       textAlign: TextAlign.center,
       style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
     );
@@ -37,8 +49,8 @@ class LoginScreen extends StatelessWidget {
             onChanged: bloc.changeEmail,
             keyboardType: TextInputType.emailAddress,
             decoration: InputDecoration(
-                hintText: 'you@example.com',
-                labelText: 'Email Address',
+                hintText: emailFieldHint,
+                labelText: emailFieldLabel,
                 errorText: snapshot.error),
           );
         });
@@ -51,10 +63,10 @@ class LoginScreen extends StatelessWidget {
         builder: (context, snapshot) {
           return TextField(
             onChanged: bloc.changePassword,
-            obscureText: false,
+            obscureText: true,
             decoration: InputDecoration(
-                hintText: 'Password',
-                labelText: 'Password',
+                hintText: passwordFieldHint,
+                labelText: passwordFieldLabel,
                 errorText: snapshot.error),
           );
         });
@@ -65,13 +77,11 @@ class LoginScreen extends StatelessWidget {
     return StreamBuilder(
         stream: bloc.submitValid,
         builder: (context, snapshot) {
-          return ButtonTheme(
-            minWidth: double.infinity,
-            child: RaisedButton(
-              child: Text('Log In'),
-              color: Colors.blue,
-              textColor: Colors.white,
-              onPressed: snapshot.hasError ? null : () => bloc.submit(),
+          return ConstrainedBox(
+            constraints: BoxConstraints.tightFor(width: double.infinity),
+            child: ElevatedButton(
+              child: Text(submitButtonText),
+              onPressed: snapshot.hasData ? () => bloc.submit() : null,
             ),
           );
         });
