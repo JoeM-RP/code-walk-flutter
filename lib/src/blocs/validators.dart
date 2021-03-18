@@ -18,4 +18,9 @@ class Validators {
       sink.addError('Please provide a password');
     }
   });
+
+  final validateCode =
+      StreamTransformer<String, String>.fromHandlers(handleData: (code, sink) {
+    sink.add(code);
+  });
 }

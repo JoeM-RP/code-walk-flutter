@@ -7,8 +7,8 @@ class LoginScreen extends StatelessWidget {
   // Main Widget
   Widget build(context) {
     final bloc = Provider.of(context);
-
-    return Container(
+    return SafeArea(
+      child: Container(
         margin: EdgeInsets.all(28.0),
         child: Column(children: [
           titleField(),
@@ -16,7 +16,9 @@ class LoginScreen extends StatelessWidget {
           passwordField(bloc),
           Container(margin: EdgeInsets.only(top: 28.0)),
           submitButton(bloc),
-        ]));
+        ]),
+      ),
+    );
   }
 
   // Title Field
@@ -51,12 +53,21 @@ class LoginScreen extends StatelessWidget {
         builder: (context, snapshot) {
           return TextField(
             onChanged: bloc.changePassword,
-            obscureText: false,
+            obscureText: true,
             decoration: InputDecoration(
                 hintText: 'Password',
                 labelText: 'Password',
                 errorText: snapshot.error),
           );
+        });
+  }
+
+// Confirmation Field
+  Widget confimationField(Bloc bloc) {
+    return StreamBuilder(
+        stream: bloc.code,
+        builder: (context, snapshot) {
+          return TextField();
         });
   }
 
@@ -71,7 +82,7 @@ class LoginScreen extends StatelessWidget {
               child: Text('Log In'),
               color: Colors.blue,
               textColor: Colors.white,
-              onPressed: snapshot.hasError ? null : () => bloc.submit(),
+              onPressed: snapshot.hasData ? () => bloc.submit() : null,
             ),
           );
         });
