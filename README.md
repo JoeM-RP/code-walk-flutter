@@ -1,6 +1,7 @@
 # code-walk-flutter
 
-Code Walk demo repository based on https://github.com/StephenGrider/FlutterCasts
+Code Walk demo repository based on [FlutterCasts](https://github.com/StephenGrider/FlutterCasts)
+from [Dart and Flutter: The Complete Developer's Guide](https://www.udemy.com/course/dart-and-flutter-the-complete-developers-guide/)
 
 ## demo
 
